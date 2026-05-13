@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Курс валют - ПАО 'ЗВЕЗДА'</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="public/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon"/>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-banner">
+            <img src="public/z.jpg" alt="Логотип ПАО ЗВЕЗДА" class="banner-image">
+        </div>
+        <div class="menu-bar-wrapper">
+            <div class="container menu-bar-container">
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="news.html">Новости</a></li>
+                        <li><a href="about.html">О предприятии</a></li>
+                        <li><a href="currency.html">Курс валют</a></li>
+                        <li><a href="video.html">Видео</a></li>
+                        <li><a href="contacts.html">Контакты</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <main class="container layout page-currency">
+        <div class="content full-width">
+            <h1>Курс валют и калькулятор</h1>
+            <div class="currency-section">
+                <h2>Конвертер валют (ЦБ РФ)</h2>
+                <div class="converter-box">
+                    <div class="input-group">
+                        <label>Сумма в рублях (RUB):</label>
+                        <input type="number" id="rubInput" placeholder="0.00" oninput="convertFromRub()">
+                    </div>
+                    <div class="swap-icon">&#8644;</div>
+                    <div class="input-group">
+                        <label>Японская иена (JPY):</label>
+                        <input type="number" id="foreignInput" placeholder="0.00" oninput="convertFromForeign()">
+                    </div>
+                </div>
+                <p id="rateInfo" class="rate-info">Загрузка курса...</p>
+            </div>
+            <div class="chart-section">
+                <h2>Диаграмма изменений курса (за 30 дней)</h2>
+                <div class="chart-container" style="position: relative; height: 300px; width: 100%;">
+                    <canvas id="currencyChart"></canvas>
+                </div>
+                <div id="chartDetails" class="chart-details">Кликните по столбцу для просмотра информации</div>
+            </div>
+        </div>
+    </main>
+    <footer class="main-footer">
+        <div class="container">
+            <p>&copy; ПАО «ЗВЕЗДА»</p>
+        </div>
+    </footer>
+    <a href="#" id="scrollToTopBtn" title="Наверх">&#8679;</a>
+    <script>
+        var moy_spisok_valut = {};
+        var moy_grafik = null;
+        function poluchit_kurs() {
+            fetch('https://www.cbr-xml-daily.ru/daily_json.js')
+                .then(function(otvet) {
+                    return otvet.json();
+                })
+                .then(function(dannie) {
+                    moy_spisok_valut = dannie.Valute;
+                    risovat_vse();
+                });
+        }
+        function risovat_vse() {
+            var iena = moy_spisok_valut['JPY'];
+            var cena = iena.Value / iena.Nominal;
+            var tekst = document.getElementById('rateInfo');
+            tekst.innerText = 'Курс: 1 иена = ' + cena.toFixed(4) + ' рубль';
+            sdelat_grafik('JPY', cena, iena.Previous / iena.Nominal);
+        }
+        function convertFromRub() {
+            var rubli = document.getElementById('rubInput').value;
+            var iena = moy_spisok_valut['JPY'];
+            var cena = iena.Value / iena.Nominal;
+            if (rubli != '') {
+                document.getElementById('foreignInput').value = (rubli / cena).toFixed(2);
+            }
+        }
+        function convertFromForeign() {
+            var ieni = document.getElementById('foreignInput').value;
+            var iena = moy_spisok_valut['JPY'];
+            var cena = iena.Value / iena.Nominal;
+            if (ieni != '') {
+                document.getElementById('rubInput').value = (ieni * cena).toFixed(2);
+            }
+        }
+        function sdelat_grafik(valuta, seychas, bilo) {
+            var mesto = document.getElementById('currencyChart').getContext('2d');
+            var nashi_dni = [];
+            var nashi_kursi = [];
+            var nashi_cveti = [];
+            var data = new Date();
+            for (var i = 29; i >= 0; i = i - 1) {
+                var den = new Date();
+                den.setDate(data.getDate() - i);
+                var krasivo = den.getDate() + '.' + (den.getMonth() + 1);
+                nashi_dni.push(krasivo);
+                if (i == 0) {
+                    nashi_kursi.push(seychas);
+                } else {
+                    if (i == 1) {
+                        nashi_kursi.push(bilo);
+                    } else {
+                        nashi_kursi.push(bilo + Math.random());
+                    }
+                }
+                nashi_cveti.push('blue');
+            }
+            if (moy_grafik != null) {
+                moy_grafik.destroy();
+            }
+            moy_grafik = new Chart(mesto, {
+                type: 'bar',
+                data: {
+                    labels: nashi_dni,
+                    datasets: [{
+                        label: 'Курс',
+                        data: nashi_kursi,
+                        backgroundColor: nashi_cveti,
+                        hoverBackgroundColor: nashi_cveti
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    plugins: {
+                        tooltip: { enabled: false }
+                    },
+                    onClick: function(sobitya, elementi) {
+                        if (elementi.length > 0) {
+                            var nomer = elementi[0].index;
+                            for (var j = 0; j < nashi_cveti.length; j = j + 1) {
+                                nashi_cveti[j] = 'blue';
+                            }
+                            nashi_cveti[nomer] = 'red';
+                            moy_grafik.update();
+                            var vibrannaya_data = nashi_dni[nomer];
+                            var vibranniy_kurs = nashi_kursi[nomer].toFixed(4);
+                            var detailsEl = document.getElementById('chartDetails');
+                            detailsEl.innerHTML = '<strong>Дата:</strong> ' + vibrannaya_data + ' &nbsp;&nbsp;&nbsp; <strong>Курс:</strong> ' + vibranniy_kurs + ' RUB';
+                            detailsEl.style.backgroundColor = '#dbe9f4';
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false
+                        }
+                    }
+                }
+            });
+        }
+        poluchit_kurs();
+    </script>
+</body>
+</html>

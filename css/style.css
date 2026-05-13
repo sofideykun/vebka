@@ -1,0 +1,231 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: Arial, sans-serif;
+    color: #333333;
+    background-color: #f0f4f8;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.container {
+    width: 96%;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+a {
+    color: #00529b;
+    text-decoration: none;
+}
+a:hover {
+    color: #003a6e;
+    text-decoration: underline;
+}
+ul {
+    list-style: none;
+}
+main {
+    flex: 1;
+}
+.main-header {
+    background-color: #ffffff;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+.header-banner {
+    background-color: #dbe9f4;
+}
+.banner-image {
+    width: 100%;
+}
+.menu-bar-wrapper {
+    background-color: #ffffff;
+    border-top: 1px solid #00529b;
+    border-bottom: 3px solid #00529b;
+    padding: 10px 0;
+}
+.menu-bar-container {
+    overflow: hidden;
+}
+.main-nav {
+    float: left;
+}
+.main-nav ul li {
+    float: left;
+    margin-right: 15px;
+}
+.main-nav a {
+    color: #00529b;
+    font-weight: bold;
+}
+.header-search {
+    float: right;
+}
+.search-input {
+    border: 1px solid #00529b;
+    padding: 5px;
+    width: 150px;
+}
+.search-btn {
+    background-color: #f0f4f8;
+    border: 1px solid #00529b;
+    padding: 5px;
+    cursor: pointer;
+}
+button {
+    background-color: #00529b;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+button:hover {
+    background-color: #003a6e;
+}
+.layout {
+    margin-top: 20px;
+    overflow: hidden;
+}
+.content {
+    float: left;
+    width: 70%;
+}
+.content.full-width {
+    width: 100%;
+    float: none;
+}
+.sidebar {
+    float: right;
+    width: 25%;
+}
+.card-block,
+.news-item,
+.widget,
+.about-section,
+.currency-section,
+.simple-contacts,
+.news-card {
+    background-color: #ffffff;
+    padding: 20px;
+    border: 1px solid #cccccc;
+    margin-bottom: 20px;
+}
+.chart-section {
+    background-color: #ffffff;
+    padding: 20px;
+    border: 1px solid #cccccc;
+    margin-bottom: 20px;
+}
+.alert {
+    background-color: #fff3cd;
+    color: #856404;
+    padding: 20px;
+    border: 1px solid #ffeeba;
+    margin-bottom: 20px;
+}
+.news {
+    width: 100%;
+}
+.news h2 {
+    color: #00529b;
+    border-bottom: 2px solid #00529b;
+    margin-bottom: 15px;
+}
+.news-item h3 {
+    color: #222222;
+}
+.news-item .date {
+    color: #888888;
+}
+.widget h3 {
+    color: #00529b;
+    border-bottom: 1px solid #cccccc;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+}
+.widget ul li {
+    margin-bottom: 10px;
+}
+.login-form form {
+    margin-top: 10px;
+}
+.login-form input {
+    margin-bottom: 10px;
+    padding: 5px;
+    width: 90%;
+    border: 1px solid #cccccc;
+}
+.main-footer {
+    background-color: #222222;
+    color: #cccccc;
+    text-align: center;
+    padding: 20px;
+}
+.about-img-right {
+    float: right;
+    margin-left: 20px;
+    width: 300px;
+}
+.about-img-left {
+    float: left;
+    margin-right: 20px;
+    width: 300px;
+}
+.news-card .news-date {
+    color: #888888;
+}
+.news-card .news-title {
+    color: #00529b;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+.toggle-news-btn {
+    background-color: #ffffff;
+    color: #00529b;
+    border: 1px solid #00529b;
+    padding: 5px 10px;
+}
+.converter-box {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.input-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.swap-icon {
+    font-size: 24px;
+    color: #00529b;
+}
+.converter-box input,
+.converter-box select {
+    padding: 10px;
+    border: 1px solid #cccccc;
+}
+.chart-details {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f0f4f8;
+    color: #00529b;
+    border: 1px solid #00529b;
+    text-align: center;
+}
+.simple-contacts h2 {
+    color: #00529b;
+}
+#scrollToTopBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #00529b;
+    color: #ffffff;
+    padding: 10px;
+    text-decoration: none;
+}
