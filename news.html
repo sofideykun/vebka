@@ -31,6 +31,7 @@
         <div class="content full-width">
             <h1>Новости компании</h1>
             <div class="news-list" id="newsContainer">
+                
                 <article class="news-card">
                     <div class="news-date">21.04.26</div>
                     <h3 class="news-title">"Неделя без турникетов" на заводе "ЗВЕЗДА"</h3>
@@ -41,7 +42,9 @@
                         студенты первого курса Академии машиностроения им. Ж.Я. Котина. Экскурсии по механосборочным
                         комплексам для них провели специалисты дирекции по персоналу.
                     </div>
+                    <button class="read-more-btn">Читать далее...</button>
                 </article>
+
                 <article class="news-card">
                     <div class="news-date">28.05.25</div>
                     <h3 class="news-title">Профессиональные пробы прошли успешно</h3>
@@ -51,7 +54,9 @@
                         предприятии специальный учебный курс, в ходе которого познакомились с различными профессиями и
                         получили представление об основах бережливого производства.
                     </div>
+                    <button class="read-more-btn">Читать далее...</button>
                 </article>
+
                 <article class="news-card">
                     <div class="news-date">21.02.25</div>
                     <h3 class="news-title">Двигатель для перспективной судовой энергоустановки прошел испытания</h3>
@@ -61,7 +66,9 @@
                         типа «Метеор 120Р» и других скоростных судов. Разработка изделия ведется предприятием в
                         инициативном порядке.
                     </div>
+                    <button class="read-more-btn">Читать далее...</button>
                 </article>
+
                 <article class="news-card">
                     <div class="news-date">08.11.24</div>
                     <h3 class="news-title">Всероссийский форсайт "Новое измерение"</h3>
@@ -71,7 +78,9 @@
                         современного профориентационного проекта, который организует школа №334 Невского района
                         Санкт-Петербурга.
                     </div>
+                    <button class="read-more-btn">Читать далее...</button>
                 </article>
+
                 <article class="news-card">
                     <div class="news-date">15.09.24</div>
                     <h3 class="news-title">Модернизация литейного цеха</h3>
@@ -81,7 +90,9 @@
                         объемы производства заготовок на 20% и существенно снизить экологическую нагрузку на окружающую
                         среду.
                     </div>
+                    <button class="read-more-btn">Читать далее...</button>
                 </article>
+
                 <article class="news-card">
                     <div class="news-date">03.07.24</div>
                     <h3 class="news-title">Участие в выставке "Нева-2024"</h3>
@@ -91,7 +102,9 @@
                         судостроительных и судоремонтных компаний. Были достигнуты предварительные договоренности о
                         поставке дизель-генераторов для новой серии ледоколов.
                     </div>
+                    <button class="read-more-btn">Читать далее...</button>
                 </article>
+
                 <article class="news-card">
                     <div class="news-date">12.05.24</div>
                     <h3 class="news-title">Награждение лучших сотрудников</h3>
@@ -100,7 +113,9 @@
                         производства. Более 30 сотрудников получили почетные грамоты и ценные подарки от руководства
                         завода. Особо была отмечена бригада слесарей-сборщиков цеха №5 за досрочное выполнение плана.
                     </div>
+                    <button class="read-more-btn">Читать далее...</button>
                 </article>
+
                 <article class="news-card">
                     <div class="news-date">20.03.24</div>
                     <h3 class="news-title">Открытие нового корпоративного музея</h3>
@@ -110,7 +125,9 @@
                         современных агрегатов. Музей открыт для посещения школьными группами и студентами профильных
                         вузов.
                     </div>
+                    <button class="read-more-btn">Читать далее...</button>
                 </article>
+
                 <article class="news-card">
                     <div class="news-date">10.01.24</div>
                     <h3 class="news-title">Подписан крупный контракт на поставку агрегатов</h3>
@@ -119,7 +136,9 @@
                         энергетической компанией на поставку серии резервных дизель-генераторных установок. Агрегаты
                         будут обеспечивать бесперебойное электроснабжение на отдаленных объектах инфраструктуры региона.
                     </div>
+                    <button class="read-more-btn">Читать далее...</button>
                 </article>
+
                 <article class="news-card">
                     <div class="news-date">05.12.23</div>
                     <h3 class="news-title">Итоги года: рост производства на 15%</h3>
@@ -129,15 +148,44 @@
                         предыдущим годом. Руководство выражает благодарность всем сотрудникам за высокий профессионализм
                         и самоотдачу.
                     </div>
+                    <button class="read-more-btn">Читать далее...</button>
                 </article>
             </div>
         </div>
     </main>
+
     <footer class="main-footer">
         <div class="container">
             <p>&copy; ПАО «ЗВЕЗДА»</p>
         </div>
     </footer>
+
     <a href="#" id="scrollToTopBtn" title="Наверх">&#8679;</a>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const newsCards = document.querySelectorAll('.news-card');
+
+            newsCards.forEach(card => {
+                const textBlock = card.querySelector('.news-full-text');
+                const btn = card.querySelector('.read-more-btn');
+                if (textBlock.scrollHeight > textBlock.clientHeight + 5) {
+                    btn.style.display = 'inline-block';
+
+                    btn.addEventListener('click', function() {
+                        textBlock.classList.toggle('expanded');
+                        
+                        if (textBlock.classList.contains('expanded')) {
+                            btn.innerText = 'Скрыть';
+                        } else {
+                            btn.innerText = 'Читать далее...';
+                        }
+                    });
+                } else {
+                    btn.style.display = 'none';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
