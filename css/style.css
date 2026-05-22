@@ -33,7 +33,6 @@ main {
     background-color: #ffffff;
     position: sticky;
     top: 0;
-    z-index: 1000;
 }
 .header-banner {
     background-color: #dbe9f4;
@@ -228,4 +227,37 @@ button:hover {
     color: #ffffff;
     padding: 10px;
     text-decoration: none;
+}
+
+.news-full-text {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    margin-bottom: 10px;
+}
+.news-full-text.expanded {
+    display: block;
+    -webkit-line-clamp: unset;
+}
+
+.read-more-btn {
+    background: none !important;
+    border: none !important;
+    color: #333333 !important;
+    padding: 0 !important;
+    font: inherit;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: underline;
+    display: block;
+    margin-top: 10px;
+    outline: none !important;
+}
+
+.read-more-btn:hover {
+    color: #333333 !important;
+    text-decoration: none !important;
+    background: none !important;
 }
